@@ -22,6 +22,7 @@
 - App支持在iOS和iPadOS上运行。
 - 使用前，请在源码（ContentzView.swift）中填入您的OpenAI API token.
 - 服务端在物联网开发版CC3200上测试通过，使用Energia编写
+- 目前iOS App只支持英语
 
 # 运行截图
 
