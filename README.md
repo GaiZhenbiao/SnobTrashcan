@@ -4,7 +4,7 @@
 
 [![Swift 5.2](https://img.shields.io/badge/Swift-5.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms iOS](https://img.shields.io/cocoapods/p/ios)
-[![GitHub downloads](https://img.shields.io/github/downloads/GaiZhenbiao/SnobTrashcan/total?)](https://github.com/GaiZhenbiao/ChuanhuWallpaper/releases)
+![GitHub downloads](https://img.shields.io/github/downloads/GaiZhenbiao/SnobTrashcan/total?)](https://github.com/GaiZhenbiao/ChuanhuWallpaper/releases)
 
 “势利眼垃圾桶”旨在提供一个势利眼垃圾桶，只允许富有的人扔垃圾。不过，由于这样不符合公序良俗，我现在已经将它教导为了聪明有礼貌的垃圾桶。
 
