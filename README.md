@@ -32,7 +32,7 @@
 
 ![auth](imgs/auth.PNG)
 
-![auth](imgs/manual control.PNG)
+![auth](imgs/control.PNG)
 
 ![connection](imgs/connection.PNG)
 
