@@ -10,6 +10,7 @@ import SwiftUI
 struct conversationCellView: View {
     
     @State var conversationMessage: ConversationMessage
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         HStack(alignment: .top) {
@@ -37,7 +38,29 @@ struct conversationCellView: View {
             }
         }
         .padding(.vertical)
-        .listRowBackground(conversationMessage.type == .robot ? Color.secondary.opacity(0.05): Color.white)
+        .listRowBackground(conversationMessage.type == .robot ? robotColor: humanColor)
+    }
+    
+    private var robotColor: Color {
+        switch colorScheme {
+            case .light:
+                return Color.secondary.opacity(0.05)
+            case .dark:
+                return Color.white.opacity(0.1)
+            @unknown default:
+                return Color.secondary.opacity(0.05)
+        }
+    }
+    
+    private var humanColor: Color {
+        switch colorScheme {
+            case .light:
+                return Color.white
+            case .dark:
+            return Color.black
+            @unknown default:
+            return Color.white
+        }
     }
 }
 
