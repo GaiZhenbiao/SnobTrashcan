@@ -13,6 +13,10 @@ enum ConversationType {
     case human
 }
 
+enum KeyValue: String {
+    case host, port
+}
+
 struct ConversationMessage: Identifiable, Equatable {
     var id = UUID()
     

@@ -38,12 +38,12 @@ The researcher is a human male named Gai Zhenbiao.
     
     
     @State var showingAlert = false
-    @State var alertHostIP = ""
-    @State var alertPort = ""
+    @AppStorage(KeyValue.host.rawValue) var alertHostIP = "192.168.31.62"
+    @AppStorage(KeyValue.port.rawValue) var alertPort = "2390"
+    @State var oldAlertHostIP = ""
+    @State var oldAlertPort = ""
     
     @State var connection: NWConnection?
-    @State var host: NWEndpoint.Host = "192.168.31.62"
-    @State var port: NWEndpoint.Port = 2390
     
     var body: some View {
         NavigationStack {
@@ -141,8 +141,8 @@ The researcher is a human male named Gai Zhenbiao.
             }
             .toolbar {
                 Button {
-                    alertHostIP = host.debugDescription
-                    alertPort = String(port.rawValue)
+                    oldAlertHostIP = alertHostIP
+                    oldAlertPort = alertPort
                     showingAlert.toggle()
                 } label: {
                     Label("Modify Connection", systemImage: "network")
@@ -173,14 +173,13 @@ The researcher is a human male named Gai Zhenbiao.
         .alert("Modify Connection", isPresented: $showingAlert) {
             TextField("Host IP Address", text: $alertHostIP)
             TextField("Host Port", text: $alertPort)
-            Button("Cancel", role: .cancel) {}
+            Button("Cancel", role: .cancel) {
+                alertHostIP = oldAlertHostIP
+                alertPort = oldAlertPort
+            }
             Button("Confirm", role: .destructive) {
-                host = NWEndpoint.Host(alertHostIP)
-                port = NWEndpoint.Port(alertPort)!
                 connect()
             }
-        } message: {
-            Text("Current Connection: \(host.debugDescription):\(String(port.rawValue))")
         }
         .sheet(isPresented: $showingLidControl){
             athorizedOpenView(lidAngle: Binding(get: {
@@ -258,7 +257,7 @@ The researcher is a human male named Gai Zhenbiao.
     }
         
     func connect() {
-        connection = NWConnection(host: host, port: port, using: .udp)
+        connection = NWConnection(host: NWEndpoint.Host(alertHostIP), port: NWEndpoint.Port(alertPort) ?? NWEndpoint.Port("2390")!, using: .udp)
         
         connection!.stateUpdateHandler = { (newState) in
             switch (newState) {
