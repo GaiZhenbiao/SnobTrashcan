@@ -15,6 +15,7 @@ struct lidControlView: View {
             Text("⚙️")
                 .font(.system(size: 100))
                 .padding(.bottom)
+                .rotationEffect(Angle(degrees: Double(lidAngle-50)))
             Text("Manual Lid Control")
                 .font(.system(size: 25, weight: .bold, design: .rounded))
             Text("Use the slider below to manually adjust the lid angle.")
