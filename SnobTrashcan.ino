@@ -38,7 +38,7 @@ void setup() {
   Serial.begin(115200);
   pinMode(PWMpin, OUTPUT);
   pinMode(humanSensorButton, INPUT_PULLUP);
-  attachInterrupt(humanSensorButton, sendHumanPassedby, RISING);
+  attachInterrupt(humanSensorButton, buttonSendHumanPassedby, RISING);
 
   // attempt to connect to Wifi network:
   Serial.print("Attempting to connect to Network named: ");
