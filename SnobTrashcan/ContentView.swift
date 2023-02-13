@@ -114,6 +114,7 @@ The researcher is a human male named Gai Zhenbiao.
                                     Label("Delete Chat", systemImage: "trash.fill")
                                         .foregroundColor(.red)
                                 }
+                                .padding(.bottom, 100)
                             }
                         }
                         .listStyle(.inset)
@@ -311,6 +312,6 @@ The researcher is a human male named Gai Zhenbiao.
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(isUnlocked: true, showingToast: false)
-        ContentView(convMessages: [ConversationMessage(type: .human, message: "hello?"), ConversationMessage(type: .robot, message: "I'm fine, thankyou. And you?")])
+        ContentView(convMessages: [ConversationMessage(type: .human, message: "hello?"), ConversationMessage(type: .robot, message: "I'm fine, thankyou. And you?"), ConversationMessage(type: .human, message: "I'm totally ok. Could I throw some trash? I got some banana peel on my hand."), ConversationMessage(type: .robot, message: "Heck yeah. Opening Lid. Please put your rabbish in."), ConversationMessage(type: .human, message: "hello?"), ConversationMessage(type: .robot, message: "I'm fine, thankyou. And you?"), ConversationMessage(type: .human, message: "I'm totally ok. Could I throw some trash? I got some banana peel on my hand."), ConversationMessage(type: .robot, message: "Heck yeah. Opening Lid. Please put your rabbish in."), ConversationMessage(type: .human, message: "hello?"), ConversationMessage(type: .robot, message: "I'm fine, thankyou. And you?"), ConversationMessage(type: .human, message: "I'm totally ok. Could I throw some trash? I got some banana peel on my hand."), ConversationMessage(type: .robot, message: "Heck yeah. Opening Lid. Please put your rabbish in.")])
     }
 }
