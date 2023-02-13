@@ -46,7 +46,7 @@ The researcher is a human male named Gai Zhenbiao.
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
                 VStack {
                     if convMessages.isEmpty {
                         ScrollView {
@@ -119,25 +119,24 @@ The researcher is a human male named Gai Zhenbiao.
                     }
                 }
                 .frame(maxHeight: .infinity)
+                
                 VStack {
-                    Group {
-                        HStack {
-                            TextField("Any words to the trashcan...", text: $message)
-                                .textFieldStyle(.roundedBorder)
-                            Button {
-                                NSLog("Send pressed")
-                                convMessages.append(ConversationMessage(type: .human, message: message))
-                                gptSend(text: message)
-                                message = ""
-                            } label: {
-                                Image(systemName: "paperplane.fill")
-                            }
+                    Spacer()
+                    HStack {
+                        TextField("Any words to the trashcan...", text: $message)
+                            .textFieldStyle(.roundedBorder)
+                        Button {
+                            NSLog("Send pressed")
+                            convMessages.append(ConversationMessage(type: .human, message: message))
+                            gptSend(text: message)
+                            message = ""
+                        } label: {
+                            Image(systemName: "paperplane.fill")
                         }
-                        .padding()
                     }
+                    .padding()
+                    .background(.thinMaterial)
                 }
-                .padding(0)
-                .background(.regularMaterial)
             }
             .toolbar {
                 Button {
@@ -154,7 +153,7 @@ The researcher is a human male named Gai Zhenbiao.
                 Button {
                     showingLidControl.toggle()
                 } label: {
-                    Image(systemName: "gearshape.fill")
+                    Image(systemName: "gearshape.arrow.triangle.2.circlepath")
                 }
             }
             .navigationTitle("Trash GPT")
