@@ -37,12 +37,13 @@ The researcher is a human male named Gai Zhenbiao.
     @State var toastAlertType: AlertToast.AlertType = .complete(.green)
     
     
-//    @State var showingAlert = false
-//    @State var alertMessage = ""
+    @State var showingAlert = false
+    @State var alertHostIP = ""
+    @State var alertPort = ""
     
     @State var connection: NWConnection?
-    var host: NWEndpoint.Host = "192.168.31.62"
-    var port: NWEndpoint.Port = 2390
+    @State var host: NWEndpoint.Host = "192.168.31.62"
+    @State var port: NWEndpoint.Port = 2390
     
     var body: some View {
         NavigationStack {
@@ -140,6 +141,13 @@ The researcher is a human male named Gai Zhenbiao.
             }
             .toolbar {
                 Button {
+                    alertHostIP = host.debugDescription
+                    alertPort = String(port.rawValue)
+                    showingAlert.toggle()
+                } label: {
+                    Label("Modify Connection", systemImage: "network")
+                }
+                Button {
                     checkConnectivity.toggle()
                     connect()
                     checkConnectivity.toggle()
@@ -147,7 +155,7 @@ The researcher is a human male named Gai Zhenbiao.
                     if checkConnectivity {
                         ProgressView()
                     } else {
-                        Image(systemName: "link.icloud.fill")
+                        Image(systemName: "bolt.horizontal.circle")
                     }
                 }
                 Button {
@@ -162,9 +170,18 @@ The researcher is a human male named Gai Zhenbiao.
             AlertToast(type: toastAlertType, title: toastMessage)
         }
         .onAppear(perform: connect)
-//        .alert(alertMessage, isPresented: $showingAlert) {
-//            Button("OK", role: .cancel) { }
-//        }
+        .alert("Modify Connection", isPresented: $showingAlert) {
+            TextField("Host IP Address", text: $alertHostIP)
+            TextField("Host Port", text: $alertPort)
+            Button("Cancel", role: .cancel) {}
+            Button("Confirm", role: .destructive) {
+                host = NWEndpoint.Host(alertHostIP)
+                port = NWEndpoint.Port(alertPort)!
+                connect()
+            }
+        } message: {
+            Text("Current Connection: \(host.debugDescription):\(String(port.rawValue))")
+        }
         .sheet(isPresented: $showingLidControl){
             athorizedOpenView(lidAngle: Binding(get: {
                 self.lidAngle
