@@ -1,17 +1,12 @@
-
 /*
   WiFi UDP Send and Receive String
-
  This sketch wait an UDP packet on localPort using the CC3200 launchpad
  When a packet is received an Acknowledge packet is sent to the client on port remotePort
-
-
  created 30 December 2012
  by dlf (Metodo2 srl)
- 
+
  modified 1 July 2014
  by Noah Luskey
-
  */
 
 #ifndef __CC3200R1M1RGC__
@@ -23,6 +18,8 @@
 #include <WiFi.h>
 
 int lidAngle = 0;
+int analogPin = A3;
+int val = 0;
 
 // your network name also called SSID
 char ssid[] = "8-301";
@@ -46,7 +43,7 @@ void setup() {
   // attempt to connect to Wifi network:
   Serial.print("Attempting to connect to Network named: ");
   // print the network name (SSID);
-  Serial.println(ssid); 
+  Serial.println(ssid);
   // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
   WiFi.begin(ssid, password);
   while ( WiFi.status() != WL_CONNECTED) {
@@ -54,10 +51,10 @@ void setup() {
     Serial.print(".");
     delay(300);
   }
-  
+
   Serial.println("\nYou're connected to the network");
   Serial.println("Waiting for an ip address");
-  
+
   while (WiFi.localIP() == INADDR_NONE) {
     // print dots while we wait for an ip addresss
     Serial.print(".");
@@ -110,6 +107,14 @@ void loop() {
 
 void setLidAngle(int newAngle){
   analogWrite(PWMpin, newAngle);
+}
+
+void autoHumanPassedby(){
+  delay(20);
+  val = analogRead(analogPin);    // read the input pin
+  if(val>0){
+    sendHumanPassedby();
+    }
 }
 
 void buttonSendHumanPassedby(){
