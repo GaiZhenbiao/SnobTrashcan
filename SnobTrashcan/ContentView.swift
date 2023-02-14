@@ -235,7 +235,7 @@ The researcher is a human male named Gai Zhenbiao.
             messageHistory = conversationStartingPoint
         }
         if !text.isEmpty{
-            openAI.sendCompletion(with: messageHistory + "\n\nResearcher: \(text)", maxTokens: 100) { result in // Result<OpenAI, OpenAIError>
+            openAI.sendCompletion(with: messageHistory + "\n\nResearcher: \(text)", maxTokens: 200) { result in // Result<OpenAI, OpenAIError>
                 switch result {
                 case .success(let success):
                     let gptResponse = (success.choices.first?.text ?? "").trimmingCharacters(in: .newlines)
